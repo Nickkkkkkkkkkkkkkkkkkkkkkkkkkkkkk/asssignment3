@@ -6,3 +6,4 @@ class Move:
 
     # There is nothing to define here!
     # Just adding a comment here
+    # adding another comment here
