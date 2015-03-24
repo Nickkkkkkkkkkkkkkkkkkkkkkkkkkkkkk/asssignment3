@@ -1,4 +1,5 @@
 from subtract_square_state import SubtractSquareState
+from copy import deepcopy
 
 class GameStateNode:
     '''
@@ -81,8 +82,33 @@ class GameStateNode:
         >>> root.__eq__(a4_node)
         True
         '''
-        pass
-
+        # Implementation comment
+        # 0: Check the argnment node has a winner
+        # 1st: Generate all possible moves
+        # 2nd: Make them become GameStateNode's
+        # 3rd: Assign them to children
+        # 4th: Recursively calling the method upon the children
+        # 5th: Do 0 thru 4th until when method winner is called
+        # upon that node returns True
+        
+        # Base case
+        if self.value.winner("p1") or self.value.winner("p2"):
+            pass
+        else:
+            # Generate all possible moves
+            possible_next_moves = deepcopy(self.value.possible_next_moves())
+            possible_next_move_nodes = []
+            for move in possible_next_moves:
+                # Make a copy of argument node's gamestate to prevent side effects
+                cur_game_state = deepcopy(self.value)
+                # Append the child in a a list
+                possible_next_move_nodes.append(GameStateNode(cur_game_state.apply_move(move)))
+            self.children = deepcopy(possible_next_move_nodes)
+            assert len(self.children) is len(possible_next_moves), 'lengths of node lists and move lists are not the same'
+            # Recursively calling the method upon the children
+            for child_node in self.children:
+                child_node.grow()
+                
 def same_contents(L1, L2):
     ''' (list, list) -> bool
     
