@@ -135,7 +135,7 @@ def node_count(root):
     >>> node_count(root)
     13
     '''
-    pass
+    return 1 + sum([node_count(child) for child in root.children])
 
 def leaf_count(root):
     '''(GameStateNode) -> int
@@ -148,7 +148,11 @@ def leaf_count(root):
     >>> leaf_count(root)
     4
     '''
-    pass
+    # Base case
+    if root.children == []:
+        return 1
+    else:
+        return sum([leaf_count(child) for child in root.children])
 
 def distinct_node_count(root):
     '''(GameStateNode) -> int
