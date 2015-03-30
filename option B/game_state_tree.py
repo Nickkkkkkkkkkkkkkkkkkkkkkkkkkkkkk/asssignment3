@@ -136,6 +136,7 @@ def distinct_node_count(root):
     >>> distinct_node_count(root)
     10
     '''
+    # A prof's answer to helper function for these "distinct functions"..https://piazza.com/class/i4k2lgxvqvu2mc?cid=990
     pass
                       
 def distinct_leaf_count(root):
